@@ -29,7 +29,7 @@ const login = () =>{
                 throw new Error(error);
             }
 
-            const data = await response.json();
+            const data = await response.text();
             console.log("Login success:", data);
         } catch (err){
             console.error("Login failed:", err.message)
