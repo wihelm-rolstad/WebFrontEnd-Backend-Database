@@ -17,6 +17,6 @@ public class DbPingController {
 
   @GetMapping("/api/db-ping")
   public Map<String, Object> oneRow() {
-    return jdbc.queryForMap("select * from public.users limit 1");
+    return jdbc.queryForMap("select * from public.user limit 1");
   }
 }
