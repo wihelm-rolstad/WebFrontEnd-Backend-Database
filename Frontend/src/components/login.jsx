@@ -6,10 +6,34 @@ const login = () =>{
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
-    function handleRegister(){
+    async function handleRegister(){
         console.log("userEmail:", userEmail);
         console.log("userPhoneNumber:", userPhoneNumber);
         console.log("userPassword:", userPassword);
+
+        const payload = {
+            email: userEmail,
+            phoneNumber: userPhoneNumber,
+            password: userPassword,
+        };
+
+        try{
+            const response = await fetch("http://localhost:8080/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok){
+                const error = await response.text();
+                throw new Error(error);
+            }
+
+            const data = await response.json();
+            console.log("Login success:", data);
+        } catch (err){
+            console.error("Login failed:", err.message)
+        }    
     }
 
 
