@@ -1,24 +1,23 @@
-import './login.css';
-import { useState } from "react";
+import './login.css'
+import { useState } from 'react'
 
-const login = () =>{
-    const [userEmail, setUserEmail] = useState("");
-    const [userPhoneNumber, setUserPhoneNumber] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+const login = () => {
+    const [email, setEmailAdress] = useState("")
+    const [password, setPassword] = useState("")
 
-    async function handleRegister(){
-        console.log("userEmail:", userEmail);
-        console.log("userPhoneNumber:", userPhoneNumber);
-        console.log("userPassword:", userPassword);
+    const [userFeedback, setUserFeedback] = useState("");
+
+    async function handleLogin(){
+
+        console.log("login gets handeled")
 
         const payload = {
-            email: userEmail,
-            phoneNumber: userPhoneNumber,
-            password: userPassword,
+            email: email,
+            password: password,
         };
 
         try{
-            const response = await fetch("http://localhost:8080/register", {
+            const response = await fetch("http://localhost:8080/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -30,34 +29,29 @@ const login = () =>{
             }
 
             const data = await response.text();
-            console.log("Login success:", data);
+            if (data === "ok"){
+                console.log("login success")
+                setUserFeedback("login success")
+            } else {
+                console.log("login failed")
+                setUserFeedback("login failed")
+            }
         } catch (err){
             console.error("Login failed:", err.message)
         }    
     }
 
-
     return(
         <>
-        <h1>Register.</h1>
+            <h1>Log In</h1>
             <div id="user-inputs">
-                <input type="email" 
-                placeholder="your email adress" 
-                onChange={(e) => setUserEmail(e.target.value)}></input>
-
-                <input type="tel" 
-                name="phone" 
-                placeholder="phone number" 
-                onChange={(e) => setUserPhoneNumber(e.target.value)}></input>
-
-                <input type="password" 
-                placeholder="password"
-                onChange={(e) => setUserPassword(e.target.value)}></input>
+                <input type="text" placeholder="your email adress" onChange={(e) => setEmailAdress(e.target.value)}></input>
+                <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
+                <p id="user-feedback">{userFeedback}</p>
+                <button id="login-button" onClick={handleLogin}> Log in</button>
             </div>
-        <button type="submit" id="register-button" onClick={handleRegister}>Register</button>
-        <p>Already have an account? Login</p>
         </>
     )
 }
 
-export default login;
+export default login
