@@ -1,0 +1,89 @@
+#container{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    border-radius: 18px;
+    width: 40vw;
+    background-color: rgb(255, 255, 255);
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#user-input-container{
+    display:grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 8px 12px;
+    background-color: rgb(233, 249, 255);
+    padding:20px;
+    border-radius: 12px;
+    border: solid 1px rgb(193, 223, 252);
+}
+
+#user-input-container p{
+    margin: 0;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(14, 133, 244);
+}
+
+#weight-input, #unit-select, #date-input{
+    border: solid 1px rgb(193, 223, 252);
+    border-radius: 8px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: rgb(233, 249, 255);
+}
+
+
+#weight-input{
+    flex: 1;
+}
+
+#unit-select{
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#date-input{
+    flex: 2;
+}
+
+#register-button{
+    background-color: rgb(14, 133, 244);
+    color: white;
+    width: 100%;
+    grid-column: 1/-1;
+}
+
+#register-button:hover{
+    background-color: rgb(4, 97, 184);
+    color: white;
+}
+
+#weight-diagram{
+    background-color: rgb(233, 249, 255);
+    padding:20px;
+    border-radius: 12px;
+    border: solid 1px rgb(193, 223, 252);
+}
+
+#tip{
+    background-color: rgb(233, 249, 255);
+    padding:5px;
+    border-radius: 12px;
+    border: solid 1px rgb(193, 223, 252);
+    font-size: 12px;
+    text-align: left;
+}
+
+#user-input-container #user-feedback{
+    text-align: center;
+    color: red;
+    grid-column: 1 / -1;  /* full row in grid */
+    text-align: center;
+    width: 100%;
+}
