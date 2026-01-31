@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from './components/register.jsx'
 import Login from './components/login.jsx'
+import Dashboard from './components/dashboard.jsx'
 import './App.css'
 
-function App() {
+function AuthPage() {
   
   const [active, setActive] = useState("a");
 
@@ -24,6 +26,17 @@ function App() {
       )}
     </>
   )
+}
+
+function App(){
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AuthPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App
