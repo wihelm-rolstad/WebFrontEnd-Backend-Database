@@ -1,11 +1,14 @@
 import './login.css'
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const login = () => {
     const [email, setEmailAdress] = useState("")
     const [password, setPassword] = useState("")
 
     const [userFeedback, setUserFeedback] = useState("");
+
+    const navigate = useNavigate();
 
     async function handleLogin(){
 
@@ -32,6 +35,8 @@ const login = () => {
             if (data === "ok"){
                 console.log("login success")
                 setUserFeedback("login success")
+                setTimeout(()=>
+                navigate("/dashboard"), 1000);
             } else {
                 console.log("login failed")
                 setUserFeedback("login failed")
