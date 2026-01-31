@@ -30,9 +30,9 @@ const register = () =>{
             }
 
             const data = await response.text();
-            console.log("Login success:", data);
+            console.log("Registration success:", data);
         } catch (err){
-            console.error("Login failed:", err.message)
+            console.error("Registration failed:", err.message)
         }    
     }
 
