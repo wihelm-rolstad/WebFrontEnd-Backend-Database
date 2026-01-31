@@ -1,9 +1,10 @@
 import './dashboard.css'
+import WeightProgress from './weightProgress.jsx'
 
 const dashboard = () => {
     return(
         <>
-            <h1 id="dashboard-header">LOGIN SUCCESSFUL!!!</h1>
+            <WeightProgress/>
         </>
     )
 }
