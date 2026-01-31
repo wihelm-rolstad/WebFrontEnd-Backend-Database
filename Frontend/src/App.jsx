@@ -9,17 +9,17 @@ function App() {
 
   return (
     <>
-      {active === "a" && (
+      {active === "b" && (
         <div>
           <Register/>
-          <p style={{cursor: "pointer"}} onClick={() => setActive("b")}>Already have an account? Log in.</p>
+          <p style={{cursor: "pointer"}} onClick={() => setActive("a")}>Already have an account? Log in.</p>
         </div>
       )}
 
-      {active === "b" && (
+      {active === "a" && (
         <div>
           <Login/>
-          <p style={{cursor: "pointer"}} onClick={() => setActive("a")}>Don't have an account? Register.</p>
+          <p style={{cursor: "pointer"}} onClick={() => setActive("b")}>Don't have an account? Register.</p>
         </div>
       )}
     </>
