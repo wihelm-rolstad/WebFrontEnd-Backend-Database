@@ -14,15 +14,45 @@ const weightProgress = () =>{
     const[userFeedback, setUserFeedback] = useState("");
 
     async function handleRegisterWeight(){
-        if (weight != "" && weight > 20){
-            console.log("Registering weight...")
-            setColor("green")
-            setUserFeedback("Weight registered")
-            setWeight("")
-
-        } else {
+        if(weight === "" || weight < 20){
             setColor("red")
             setUserFeedback("Weight is not entered")
+        } else {
+            console.log("Registering weight...")
+            setColor("green")
+            setUserFeedback("Registering weight")
+            setWeight("")
+
+            const session_token = localStorage.getItem("sessionToken");
+            console.log("Session-token:", session_token)
+            const payload = {
+                sessionToken: session_token,
+                weight: weight,
+                date: date,
+            }
+
+            try{
+                const response = await fetch("http://localhost:8080/register-weight", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+
+                if (!response.ok){
+                const error = await response.text();
+                throw new Error(error);
+                }
+
+                const data = await response.json(); 
+                if(data.status === "ok"){
+                    console.log("weight is being stored")
+                } else {
+                    console.log("weight not registered something failed")
+                }
+
+            } catch (err){
+                console.error("Login failed:", err.message)
+            }
         }
     }
 
