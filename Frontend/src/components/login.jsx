@@ -31,12 +31,12 @@ const login = () => {
                 throw new Error(error);
             }
 
-            const data = await response.text();
-            if (data === "ok"){
-                console.log("login success")
-                setUserFeedback("login success")
-                setTimeout(()=>
-                navigate("/dashboard"), 1000);
+            const data = await response.json(); //gets status and token if status === ok
+            if (data.status === "ok"){
+                localStorage.setItem("sessionToken", data.token);
+                console.log("login success with token: " + data.token);
+                setUserFeedback("login success");
+                setTimeout(()=> navigate("/dashboard"), 500);
             } else {
                 console.log("login failed")
                 setUserFeedback("login failed")
