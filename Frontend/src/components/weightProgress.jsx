@@ -1,8 +1,21 @@
 import './weightProgress.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 
 
 const weightProgress = () =>{
+
     const today = new Date().toISOString().split("T")[0];
     const[date, setDate] = useState(today)
 
@@ -12,6 +25,26 @@ const weightProgress = () =>{
 
     const[color, setColor] = useState("red")
     const[userFeedback, setUserFeedback] = useState("");
+
+    useEffect(() => {
+        loadWeight();
+    }, []);
+
+
+    const sorted = [...weights].sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
+    const labels = sorted.map(w => w.recorded_at);
+    const data = {
+        labels,
+        datasets: [
+            {
+            label: "Weight",
+            data: sorted.map(w => w.weight),
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59,130,246,0.2)",
+            tension: 0.3,
+            },
+        ],
+    };
 
     async function handleRegisterWeight(){
         if(weight === "" || weight < 20){
@@ -72,7 +105,6 @@ const weightProgress = () =>{
 
                 const data = await response.json();
                 setWeights(data);
-                console.log(data);
 
             } catch (err){
                 console.error("Fetching weight failed: ", err.message)
@@ -120,7 +152,7 @@ const weightProgress = () =>{
                 </div>
 
                 <div id="weight-diagram">
-                    <h3>Diagram...</h3>
+                    <Line data={data} />
                 </div>
 
                 <p id="tip">Tip: Weigh yourself at the same time every day to ensure consistent and accurate results. </p>
