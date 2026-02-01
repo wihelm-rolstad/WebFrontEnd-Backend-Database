@@ -5,10 +5,10 @@ import java.time.LocalDate;
 public class registerWeightRequest {
 
     private String sessionToken;
-    private int weight;
+    private Double weight;
     private LocalDate date;
 
-    public registerWeightRequest(String sessionToken, int weight, LocalDate date){
+    public registerWeightRequest(String sessionToken, Double weight, LocalDate date){
         this.sessionToken = sessionToken;
         this.weight = weight;
         this.date = date;
@@ -22,7 +22,7 @@ public class registerWeightRequest {
         return this.sessionToken;
     }
 
-    public int getWeight(){
+    public Double getWeight(){
         return this.weight;
     }
 
