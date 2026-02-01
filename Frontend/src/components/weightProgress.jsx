@@ -6,9 +6,9 @@ const weightProgress = () =>{
     const today = new Date().toISOString().split("T")[0];
     const[date, setDate] = useState(today)
 
-    const[weight, setWeight] = useState("")
-
-    const[unit, setUnit] = useState("")
+    const[weight, setWeight] = useState("")//int 
+    const[weights, setWeights] = useState([]); // array
+    const[unit, setUnit] = useState("")//use for later
 
     const[color, setColor] = useState("red")
     const[userFeedback, setUserFeedback] = useState("");
@@ -46,6 +46,7 @@ const weightProgress = () =>{
                 const data = await response.json(); 
                 if(data.status === "ok"){
                     console.log("weight is being stored")
+                    loadWeight();
                 } else {
                     console.log("weight not registered something failed")
                 }
@@ -54,6 +55,28 @@ const weightProgress = () =>{
                 console.error("Login failed:", err.message)
             }
         }
+    }
+
+    async function loadWeight(){
+        const token = localStorage.getItem("sessionToken")
+         try{
+                const response = await fetch("http://localhost:8080/get-weights", {
+                    method: "GET",
+                    headers: { Authorization: `Bearer ${token}`},
+                })
+
+                if (!response.ok){
+                const error = await response.text();
+                throw new Error(error);
+                }
+
+                const data = await response.json();
+                setWeights(data);
+                console.log(data);
+
+            } catch (err){
+                console.error("Fetching weight failed: ", err.message)
+            }
     }
 
     return(

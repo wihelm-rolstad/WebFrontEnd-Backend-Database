@@ -2,19 +2,19 @@ package com.wilhelm.backend.weight;
 
 import java.time.LocalDate;
 
-public class weightRequest {
+public class registerWeightRequest {
 
     private String sessionToken;
     private int weight;
     private LocalDate date;
 
-    public weightRequest(String sessionToken, int weight, LocalDate date){
+    public registerWeightRequest(String sessionToken, int weight, LocalDate date){
         this.sessionToken = sessionToken;
         this.weight = weight;
         this.date = date;
     }
 
-    public weightRequest(){
+    public registerWeightRequest(){
 
     }
 
