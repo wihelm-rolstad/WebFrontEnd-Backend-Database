@@ -1,5 +1,6 @@
 import styles from './workoutTracker.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import WorkoutCard from './workoutCard.jsx'
 
 const workoutTracker = () => {
 
@@ -12,6 +13,11 @@ const workoutTracker = () => {
     const[duration, setDuration] = useState("")
     const[note, setNote] = useState("")
 
+    useEffect(() => {
+        loadWorkouts();
+    }, []);
+
+    
     async function handeTrack(){
         if( type === "" || duration <= 0 || date == ""){
             console.log("not all parameters are defined")
@@ -53,6 +59,32 @@ const workoutTracker = () => {
             }
         } 
     }
+
+    async function loadWorkouts(){
+        const token = localStorage.getItem("sessionToken")
+         try{
+                const response = await fetch("http://localhost:8080/get-workouts", {
+                    method: "GET",
+                    headers: { Authorization: `Bearer ${token}`},
+                })
+
+                if (!response.ok){
+                const error = await response.text();
+                throw new Error(error);
+                }
+
+                const data = await response.json(); 
+                if(data.status === "ok"){
+                    setTotalWorkouts(data.rows);
+                    console.log("stored and fetched data", data)
+                } else {
+                    console.log("storing workout failed")
+                }
+
+            } catch (err){
+                console.error("Fetching workouts failed: ", err.message)
+            }
+    }
  
 
     return(
@@ -84,14 +116,19 @@ const workoutTracker = () => {
                     <button className={styles.trackButton} onClick={handeTrack}>Track</button>
                 </div>
 
+                <div className={styles.workoutsContainer}>
+                    <p>Total Workouts: {numWorkouts}</p>
                 <div className={styles.workoutInformation}>
-                    <p>Total workouts: {numWorkouts}</p> 
-                    <p>Total duration:</p>
-
-                    <div className={styles.workoutsContainer}>
-                        ...
-                    </div>
-
+                        {totalWorkouts.map((workout, i) => (
+                        <WorkoutCard
+                            key={workout.workout_id ?? i}
+                            date={workout.workout_date}
+                            type={workout.workout_type}
+                            duration={workout.workout_duration}
+                            note={workout.workout_note}
+                            />
+                        ))}
+                </div>
                 </div>
             </div>
 
