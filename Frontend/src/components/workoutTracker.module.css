@@ -46,19 +46,18 @@
     height: 80px;
 }
 
-.workoutInformation{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
+.workoutsContainer{
     background-color: rgb(233, 249, 255);
     padding:20px;
     border-radius: 12px;
     border: solid 1px rgb(193, 223, 252);
 }
 
-.workoutsContainer{
-    grid-column: 1/-1;
-    background-color: #fbfbfb;
-    padding:20px;
-    border-radius: 12px;
-    border: solid 1px rgb(193, 223, 252);
+.workoutInformation{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    height: 300px;
+    overflow: auto;
 }
+

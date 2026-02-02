@@ -31,11 +31,22 @@ public class workoutController {
             }
     }
 
+   @GetMapping("/get-workouts")
+    public ResponseEntity<?> getWorkouts(@RequestHeader("Authorization") String auth){
+        if (auth == null || auth.isBlank()){
+            return ResponseEntity.status(401).body(Map.of("status", "missing_token"));
+        }
+        String token = auth.startsWith("Bearer ") ? auth.substring(7) : auth;
+        if (token.isBlank()){
+            return ResponseEntity.status(401).body(Map.of("status", "missing_token"));
+        }
+        ResponseEntity<?> workoutData = fetchWorkouts(token);
+        return workoutData;
+    } 
+
     public ResponseEntity<?> fetchWorkouts(String sessionToken){
         String sql = ("SELECT workout_date, workout_type, workout_note, workout_duration FROM public.workout WHERE user_id = (SELECT user_id FROM public.session_token WHERE token = ?)");
         var rows = jdbc.queryForList(sql, sessionToken);
         return ResponseEntity.ok(Map.of("status","ok","rows", rows));
     }
-    
-    
 }
