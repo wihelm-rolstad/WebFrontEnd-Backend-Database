@@ -1,4 +1,4 @@
-#user-inputs{
+.userInputs{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -8,18 +8,14 @@
     gap: 20px;
     margin: 10px;
 }
-
-#register-button{
-    background-color: black;
-    color: white;
-}
-
-#register-button:hover{
-    background-color: white;
-    color: black;
-}
-
-input{
+.userInputs input{
     width: 300px;
     height: 30px;
+}
+
+
+.loginButton{
+    background-color: black;
+    color: white;
+
 }
