@@ -6,16 +6,54 @@ const workoutTracker = () => {
     const[totalWorkouts, setTotalWorkouts] = useState([])
     const numWorkouts = totalWorkouts.length
 
-    const[date, setDate] = useState("")
-    const[type, setType] = useState("")
+    const today = new Date().toISOString().split("T")[0];
+    const[date, setDate] = useState(today)
+    const[type, setType] = useState("Strength")
     const[duration, setDuration] = useState("")
     const[note, setNote] = useState("")
 
     async function handeTrack(){
-        console.log(date, type, duration, note)
-        console.log(type)
-    }
+        if( type === "" || duration <= 0 || date == ""){
+            console.log("not all parameters are defined")
+            console.log(date, type, duration, note)
+        }
+        else{
+            
+            const sessionToken = localStorage.getItem("sessionToken")
+            const payload = {
+                sessionToken: sessionToken,
+                date: date,
+                type: type,
+                duration: duration,
+                note: note
+            }
 
+            try{
+                const response = await fetch("http://localhost:8080/register-workout",{
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+
+                if (!response.ok){
+                const error = await response.text();
+                throw new Error(error);
+                }
+
+                const data = await response.json(); 
+                if(data.status === "ok"){
+                    setTotalWorkouts(data.rows);
+                    console.log("stored and fetched data", data)
+                } else {
+                    console.log("storing workout failed")
+                }
+
+            } catch (err){
+                console.error("registering workout failed", err.message)
+            }
+        } 
+    }
+ 
 
     return(
         <>
@@ -27,7 +65,7 @@ const workoutTracker = () => {
                     <p>Workout Type</p>
                     <p>Duration</p>
 
-                    <input className={styles.dateInput} type="date"
+                    <input className={styles.dateInput} value={date} type="date"
                     onChange={(e) => setDate(e.target.value)}></input>
 
                     <select className={styles.typeSelect}
