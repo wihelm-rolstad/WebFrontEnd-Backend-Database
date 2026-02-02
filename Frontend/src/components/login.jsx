@@ -1,4 +1,4 @@
-import './login.css'
+import styles from './login.module.css'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
@@ -49,11 +49,11 @@ const login = () => {
     return(
         <>
             <h1>Log In</h1>
-            <div id="user-inputs">
+            <div className={styles.userInputs}>
                 <input type="text" placeholder="your email adress" onChange={(e) => setEmailAdress(e.target.value)}></input>
                 <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
-                <p id="user-feedback">{userFeedback}</p>
-                <button id="login-button" onClick={handleLogin}> Log in</button>
+                <p className="user-feedback">{userFeedback}</p>
+                <button className={styles.loginButton} onClick={handleLogin}> Log in</button>
             </div>
         </>
     )

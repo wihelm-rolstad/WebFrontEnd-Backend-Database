@@ -1,4 +1,4 @@
-import './weightProgress.css'
+import styles from './weightProgress.module.css'
 import { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
 import {
@@ -113,16 +113,15 @@ const weightProgress = () =>{
 
     return(
         <>
-            <div id="container">
+            <div className={styles.container}>
                 <h3>Register your weight</h3>
-                <div id="user-input-container">
-
+                <div className={styles.userInputContainer}>
                 <p>Weight</p>
                 <p>Unit</p>
                 <p>Date</p>
 
                 <input 
-                    id="weight-input" 
+                    className={styles.weightInput}
                     type="number" step="0.1" min="0" max="500" 
                     placeholder = "Enter weight"
                     value={weight}
@@ -130,32 +129,32 @@ const weightProgress = () =>{
                 </input>
 
                 <select 
-                    id="unit-select" 
+                    className={styles.unitSelect} 
                     onChange={(e) => setUnit(e.target.value)}>
                     <option>kg</option>
                     <option>lbs</option>
                 </select>
 
                 <input 
-                    id="date-input" 
+                    className={styles.dateInput}
                     type="date" 
                     value={date} 
                     onChange={(e) => setDate(e.target.value) }>
                 </input>
 
                 <button 
-                id="register-button"
+                className={styles.registerButton}
                 onClick={handleRegisterWeight}>Register Weight</button>
 
-                <p style={{color}} id="user-feedback">{userFeedback}</p>
+                <p style={{color}} className={styles.userFeedback} >{userFeedback}</p>
                 
                 </div>
 
-                <div id="weight-diagram">
+                <div className={styles.weightDiagram}>
                     <Line data={data} />
                 </div>
 
-                <p id="tip">Tip: Weigh yourself at the same time every day to ensure consistent and accurate results. </p>
+                <p className={styles.tip}>Tip: Weigh yourself at the same time every day to ensure consistent and accurate results. </p>
             </div>
         </>
     )
