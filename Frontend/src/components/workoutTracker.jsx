@@ -35,7 +35,7 @@ const workoutTracker = () => {
             }
 
             try{
-                const response = await fetch("http://localhost:8080/register-workout",{
+                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/register-workout",{
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -63,7 +63,7 @@ const workoutTracker = () => {
     async function loadWorkouts(){
         const token = localStorage.getItem("sessionToken")
          try{
-                const response = await fetch("http://localhost:8080/get-workouts", {
+                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/get-workouts", {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}`},
                 })

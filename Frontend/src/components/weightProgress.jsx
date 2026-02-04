@@ -65,7 +65,7 @@ const weightProgress = () =>{
             }
 
             try{
-                const response = await fetch("http://localhost:8080/register-weight", {
+                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/register-weight", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -93,7 +93,7 @@ const weightProgress = () =>{
     async function loadWeight(){
         const token = localStorage.getItem("sessionToken")
          try{
-                const response = await fetch("http://localhost:8080/get-weights", {
+                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/get-weights", {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}`},
                 })
