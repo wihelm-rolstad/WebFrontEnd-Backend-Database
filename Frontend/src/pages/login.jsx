@@ -1,4 +1,3 @@
-import styles from './login.module.css'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +35,7 @@ const login = () => {
                 localStorage.setItem("sessionToken", data.token);
                 console.log("login success with token: " + data.token);
                 setUserFeedback("login success");
-                setTimeout(()=> navigate("/dashboard"), 500);
+                setTimeout(()=> navigate("/app"), 500);
             } else {
                 console.log("login failed")
                 setUserFeedback("login failed")
@@ -48,13 +47,16 @@ const login = () => {
 
     return(
         <>
-            <h1>Log In</h1>
-            <div className={styles.userInputs}>
-                <input type="text" placeholder="your email adress" onChange={(e) => setEmailAdress(e.target.value)}></input>
-                <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
-                <p className="user-feedback">{userFeedback}</p>
-                <button className={styles.loginButton} onClick={handleLogin}> Log in</button>
+        <div className="mx-auto border rounded w-140 flex flex-col items-center gap-2 p-4 mt-50">
+            <h1 className="text-white font-bold text-3xl">Log In</h1>
+            <div className="flex flex-col gap-2">
+                <input className="bg-white p-1 rounded " type="text" placeholder="your email adress" onChange={(e) => setEmailAdress(e.target.value)}/>
+                <input className="bg-white p-1 rounded " type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                <p className="text-white mx-auto">{userFeedback}</p>
+                <button className="cursor-pointer bg-white text-black rounded border border-black hover:bg-black hover:border-white hover:text-white hover:scale-110 transition duration-200" onClick={handleLogin}> Log in</button>
+                <p className="text-white cursor-pointer" onClick={() => navigate("/register")}> Dont have an account? Register</p>
             </div>
+        </div>
         </>
     )
 }

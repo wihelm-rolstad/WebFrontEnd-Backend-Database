@@ -1,6 +1,5 @@
-import styles from './workoutTracker.module.css'
 import { useState, useEffect } from 'react'
-import WorkoutCard from './workoutCard.jsx'
+import WorkoutCard from '../components/elements/workoutCard.jsx'
 
 const workoutTracker = () => {
 
@@ -24,7 +23,6 @@ const workoutTracker = () => {
             console.log(date, type, duration, note)
         }
         else{
-            
             const sessionToken = localStorage.getItem("sessionToken")
             const payload = {
                 sessionToken: sessionToken,
@@ -89,36 +87,43 @@ const workoutTracker = () => {
 
     return(
         <>
-            <div className={styles.container}>
-                <h3>Track Workouts</h3>
-                <div className={styles.userInput}>
+            <div className="border border-white bg-white rounded-2xl p-4 text-[var(--color-text)] shadow-lg">
+                <h3 className="text-2xl font-bold">Track Workouts</h3>
+                <div className="grid grid-cols-6 gap-4 w-full">
 
-                    <p>Date</p>
-                    <p>Workout Type</p>
-                    <p>Duration</p>
+                        <div className="col-span-3 flex flex-col gap-0">
+                            <p>Date</p>
+                            <input className="bg-white border border-[var(--color-border)] rounded text-black p-1" value={date} type="date"
+                            onChange={(e) => setDate(e.target.value)}></input>
+                        </div>
 
-                    <input className={styles.dateInput} value={date} type="date"
-                    onChange={(e) => setDate(e.target.value)}></input>
+                        <div className="col-span-2 flex flex-col gap-0">
+                            <p>Workout Type</p>
+                            <select className="bg-white border border-[var(--color-border)] p-1 rounded text-black"
+                            onChange={(e) => setType(e.target.value)}>
+                                <option>Strength</option>
+                                <option>Cardio</option>
+                            </select>
+                        </div>
 
-                    <select className={styles.typeSelect}
-                    onChange={(e) => setType(e.target.value)}>
-                        <option>Strength</option>
-                        <option>Cardio</option>
-                    </select>
+                        <div className="col-span-1 flex flex-col gap-0">
+                            <p>Duration</p>
+                            <input className="bg-white border border-[var(--color-border)] p-1 rounded text-black"
+                            type="number" min="0" max="10000" step="5"
+                            onChange={(e) => setDuration(e.target.value)}></input>
+                        </div>
 
-                    <input className={styles.durationInput} 
-                    type="number" min="0" max="10000" step="5"
-                    onChange={(e) => setDuration(e.target.value)}></input>
-
-                    <textarea className={styles.notes} rows={5} placeholder="Add a note here..." 
-                    onChange={(e) => setNote(e.target.value)}></textarea>
-
-                    <button className={styles.trackButton} onClick={handeTrack}>Track</button>
+                        <div className="col-span-6 flex flex-col gap-0">
+                            <p>Note</p>
+                            <textarea className="bg-white border border-[var(--color-border)] rounded text-black p-1" rows={5} placeholder="Add a note here..." 
+                            onChange={(e) => setNote(e.target.value)}></textarea>
+                        </div>
+                    <button className="cursor-pointer col-span-6 bg-lime-300 mb-5 rounded-lg text-black p-1 hover:bg-black hover:text-white transition duration-200" onClick={handeTrack}>Track Workout</button>
                 </div>
 
-                <div className={styles.workoutsContainer}>
-                    <p>Total Workouts: {numWorkouts}</p>
-                <div className={styles.workoutInformation}>
+                <div className="relative overflow-auto border border-black rounded p-4 h-70 text-[var(--color-text)]">
+                    <p className="sticky absolute top-0 bg-lime-300 rounded-2xl px-4 w-fit">Total Workouts: {numWorkouts}</p>
+                    <div className="flex flex-col gap-2 p-2">
                         {totalWorkouts.map((workout, i) => (
                         <WorkoutCard
                             key={workout.workout_id ?? i}
@@ -128,7 +133,7 @@ const workoutTracker = () => {
                             note={workout.workout_note}
                             />
                         ))}
-                </div>
+                    </div>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
-import styles from './weightProgress.module.css'
 import { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
+import {Info} from 'lucide-react'
 import {
   Chart as ChartJS,
   LineElement,
@@ -39,11 +39,16 @@ const weightProgress = () =>{
             {
             label: "Weight",
             data: sorted.map(w => w.weight),
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59,130,246,0.2)",
+            borderColor: "#bef264",
+            backgroundColor: "rgba(132,204,22,0.8)",
             tension: 0.3,
             },
         ],
+    };
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
     };
 
     async function handleRegisterWeight(){
@@ -113,48 +118,54 @@ const weightProgress = () =>{
 
     return(
         <>
-            <div className={styles.container}>
-                <h3>Register your weight</h3>
-                <div className={styles.userInputContainer}>
-                <p>Weight</p>
-                <p>Unit</p>
-                <p>Date</p>
+            <div className="flex flex-col  min-w-0 border bg-white border-white p-4 rounded-2xl text-[var(--color-text)] shadow-lg">
+                <h3 className="text-2xl text-[var(--color-text)] font-bold">Register your weight</h3>
+                <div className="grid grid-cols-6 gap-0 mx-auto m-1 items-center w-full rounded">
 
-                <input 
-                    className={styles.weightInput}
-                    type="number" step="0.1" min="0" max="500" 
-                    placeholder = "Enter weight"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}>
-                </input>
+                    <div className="col-span-3 gap-0">
+                        <p>Weight</p>
+                        <input 
+                            className="w-50 border border-[var(--color-border)] p-2 rounded-lg bg-white"
+                            type="number" step="0.1" min="0" max="500" 
+                            placeholder = "Enter weight"
+                            value={weight}
+                            onChange={(e) => setWeight(e.target.value)}>
+                        </input>
+                    </div>
 
-                <select 
-                    className={styles.unitSelect} 
-                    onChange={(e) => setUnit(e.target.value)}>
-                    <option>kg</option>
-                    <option>lbs</option>
-                </select>
+                    <div className="col-span-1 gap-0">
+                        <p>Unit</p>
+                        <select 
+                            className="w-14 bg-white border border-[var(--color-border)] rounded-lg h-10" 
+                            onChange={(e) => setUnit(e.target.value)}>
+                            <option>kg</option>
+                            <option>lbs</option>
+                        </select>
+                    </div>
 
-                <input 
-                    className={styles.dateInput}
-                    type="date" 
-                    value={date} 
-                    onChange={(e) => setDate(e.target.value) }>
-                </input>
+                    <div className="col-span-2 gap-0">
+                        <p>Date</p>
+                        <input 
+                            className="bg-white border border-[var(--color-border)] rounded-lg h-10"
+                            type="date" 
+                            value={date} 
+                            onChange={(e) => setDate(e.target.value) }>
+                        </input>
+                    </div>
+                </div>
 
                 <button 
-                className={styles.registerButton}
+                className="cursor-pointer bg-lime-300 w-full p-1 mx-auto rounded-lg hover:bg-black hover:text-white transition duration-200"
                 onClick={handleRegisterWeight}>Register Weight</button>
 
-                <p style={{color}} className={styles.userFeedback} >{userFeedback}</p>
+                <p style={{color}} className="">{userFeedback}</p>
                 
+                <div className="w-full rounded-2xl p-2 h-64 mx-auto">
+                    <Line data={data} options={options} />
                 </div>
 
-                <div className={styles.weightDiagram}>
-                    <Line data={data} />
-                </div>
-
-                <p className={styles.tip}>Tip: Weigh yourself at the same time every day to ensure consistent and accurate results. </p>
+                <p className="flex gap-2 rounded p-2 mt-10"><Info/> Tip: Weigh yourself at the same time every day to ensure consistent and accurate results. </p>
+                
             </div>
         </>
     )
