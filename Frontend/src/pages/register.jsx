@@ -41,7 +41,7 @@ const register = () =>{
 
     return(
         <>
-        <div className="flex flex-col gap-2 p-2 mx-auto text-white items-center mt-40">
+        <div className="flex flex-col gap-2 p-2 mx-auto text-[var(--color-text)] items-center mt-40">
             <h1 className="text-3xl">Register.</h1>
             <div className="flex flex-col gap-2 w-140 mx-auto p-2 items-center text-black">
                 <input className="bg-white rounded p-1"

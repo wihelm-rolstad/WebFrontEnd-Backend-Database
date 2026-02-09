@@ -47,14 +47,14 @@ const login = () => {
 
     return(
         <>
-        <div className="mx-auto border rounded w-140 flex flex-col items-center gap-2 p-4 mt-50">
-            <h1 className="text-white font-bold text-3xl">Log In</h1>
+        <div className="mx-auto rounded w-140 flex flex-col items-center gap-2 p-4 mt-50">
+            <h1 className="text-[var(--color-text)] font-bold text-3xl">Log In</h1>
             <div className="flex flex-col gap-2">
                 <input className="bg-white p-1 rounded " type="text" placeholder="your email adress" onChange={(e) => setEmailAdress(e.target.value)}/>
                 <input className="bg-white p-1 rounded " type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                 <p className="text-white mx-auto">{userFeedback}</p>
                 <button className="cursor-pointer bg-white text-black rounded border border-black hover:bg-black hover:border-white hover:text-white hover:scale-110 transition duration-200" onClick={handleLogin}> Log in</button>
-                <p className="text-white cursor-pointer" onClick={() => navigate("/register")}> Dont have an account? Register</p>
+                <p className="cursor-pointer" onClick={() => navigate("/register")}> Dont have an account? Register</p>
             </div>
         </div>
         </>
