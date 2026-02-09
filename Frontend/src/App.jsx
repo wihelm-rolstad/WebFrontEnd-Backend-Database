@@ -1,39 +1,25 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from './components/register.jsx'
-import Login from './components/login.jsx'
-import Dashboard from './components/dashboard.jsx'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Register from './pages/register.jsx'
+import Login from './pages/login.jsx'
+import Dashboard from './pages/dashboard.jsx'
+import Layout from './pages/Layout.jsx'
+import UserInfo from './pages/Userinfo.jsx'
 import './App.css'
-
-function AuthPage() {
-  
-  const [active, setActive] = useState("a");
-
-  return (
-    <>
-      {active === "b" && (
-        <div>
-          <Register/>
-          <p style={{cursor: "pointer"}} onClick={() => setActive("a")}>Already have an account? Log in.</p>
-        </div>
-      )}
-
-      {active === "a" && (
-        <div>
-          <Login/>
-          <p style={{cursor: "pointer"}} onClick={() => setActive("b")}>Don't have an account? Register.</p>
-        </div>
-      )}
-    </>
-  )
-}
 
 function App(){
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AuthPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register/> } />
+
+        <Route path="/app" element={<Layout />}>
+          <Route index element={<Dashboard/>} />
+          <Route path="userinfo" element={<UserInfo/>} />
+        </Route>
+
+        <Route path="/userinfo" element={<Navigate to="/app/userinfo" replace />} />
       </Routes>
     </BrowserRouter>
   );
