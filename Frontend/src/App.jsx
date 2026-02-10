@@ -6,6 +6,7 @@ import LoginMobile from './pages/LoginMobile.jsx'
 import Dashboard from './pages/dashboard.jsx'
 import Layout from './pages/Layout.jsx'
 import UserInfo from './pages/Userinfo.jsx'
+import Social from './pages/Social.jsx'
 import './App.css'
 
 
@@ -34,6 +35,7 @@ function App(){
         <Route path="/app" element={<Layout />}>
           <Route index element={<Dashboard/>} />
           <Route path="userinfo" element={<UserInfo/>} />
+          <Route path="social" element={<Social/>} />
         </Route>
 
         <Route path="/userinfo" element={<Navigate to="/app/userinfo" replace />} />

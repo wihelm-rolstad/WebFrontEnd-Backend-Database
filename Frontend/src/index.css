@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root{
-    --color-bg: rgb(241, 241, 241);
-    --color-accent: rgb(148, 223, 243);
+    --color-bg: rgb(26, 26, 26);
+    --color-accent: rgb(0, 0, 0);
     --color-accent2: rgb(146, 241, 94);
     --color-text: rgb(21, 21, 21);
     --color-border: rgb(206, 206, 206);

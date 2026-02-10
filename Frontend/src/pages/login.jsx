@@ -14,15 +14,15 @@ const login = () => {
 
     return(
         <>
-        <div className="flex">
-            <div className="fixed top-50 left-50">
-                <p className="text-2xl font-bold bg-gradient-to-br from-lime-400 to-emerald-600 bg-clip-text text-transparent">APPLICATION NAME</p>
-                <p>Description here</p>
+        <div className="flex ">
+            <div className="fixed top-50 left-50 text-white">
+                <p className="text-4xl font-bold bg-gradient-to-br from-white to-gray-600 bg-clip-text text-transparent">Lift Log</p>
+                <p>Consistency is trough visualized progression</p>
             </div>
 
 
-            <div className="fixed right-0 h-full w-[30%] flex flex-col items-center gap-2 p-2 py-60 bg-gradient-to-br from-lime-400 to-emerald-600 text-white">
-                <h1 className="font-bold text-3xl">Log In</h1>
+            <div className="fixed right-0 h-full w-[30%] flex flex-col items-center gap-2 p-2 py-60 bg-gray-800 text-white">
+                <h1 className="font-bold text-3xl ">Log In</h1>
                 <div className="flex flex-col gap-2">
                     <FancyInput
                         desc="Email"
