@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {
     "http://localhost:5173",
-    "https://fitness-app-amber-xi-29.vercel.app",
+    "https://fitness-app-amber-xi-29.vercel.app","https://liftlog.no"
 })
 @RestController
 public class weightController {
