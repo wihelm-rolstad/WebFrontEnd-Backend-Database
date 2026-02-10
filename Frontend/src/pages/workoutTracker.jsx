@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import WorkoutCard from '../components/elements/workoutCard.jsx'
+import {Pencil} from 'lucide-react'
 
-const workoutTracker = () => {
+const workoutTracker = ({ className = "" }) => {
 
     const[totalWorkouts, setTotalWorkouts] = useState([])
     const numWorkouts = totalWorkouts.length
@@ -87,43 +88,48 @@ const workoutTracker = () => {
 
     return(
         <>
-            <div className="border border-white bg-white rounded-2xl p-4 text-[var(--color-text)] shadow-lg">
+        <div className={`flex flex-col gap-8 w-full min-w-0 ${className}`}>
+            <div className="flex flex-col border border-white bg-white rounded-2xl p-4 text-[var(--color-text)] shadow-lg">
                 <h3 className="text-2xl font-bold">Track Workouts</h3>
-                <div className="grid grid-cols-6 gap-4 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-6 gap-2 w-full m-1">
 
-                        <div className="col-span-3 flex flex-col gap-0">
+                        <div className="md:col-span-3 flex flex-col gap-0 min-w-0">
                             <p>Date</p>
-                            <input className="bg-white border border-[var(--color-border)] rounded text-black p-1" value={date} type="date"
+                            <input className="w-full bg-white border border-[var(--color-border)] rounded text-black p-1 h-10" value={date} type="date"
                             onChange={(e) => setDate(e.target.value)}></input>
                         </div>
 
-                        <div className="col-span-2 flex flex-col gap-0">
+                        <div className="md:col-span-2 flex flex-col gap-0 min-w-0">
                             <p>Workout Type</p>
-                            <select className="bg-white border border-[var(--color-border)] p-1 rounded text-black"
+                            <select className="w-full bg-white border border-[var(--color-border)] p-1 rounded text-black h-10"
                             onChange={(e) => setType(e.target.value)}>
                                 <option>Strength</option>
                                 <option>Cardio</option>
                             </select>
                         </div>
 
-                        <div className="col-span-1 flex flex-col gap-0">
+                        <div className="md:col-span-1 flex flex-col gap-0 min-w-0">
                             <p>Duration</p>
-                            <input className="bg-white border border-[var(--color-border)] p-1 rounded text-black"
+                            <input className="w-full bg-white border border-[var(--color-border)] p-1 rounded text-black h-10"
                             type="number" min="0" max="10000" step="5"
                             onChange={(e) => setDuration(e.target.value)}></input>
                         </div>
 
-                        <div className="col-span-6 flex flex-col gap-0">
+                        <div className="md:col-span-6 flex flex-col gap-0 min-w-0">
                             <p>Note</p>
-                            <textarea className="bg-white border border-[var(--color-border)] rounded text-black p-1" rows={5} placeholder="Add a note here..." 
+                            <textarea className="w-full bg-white border border-[var(--color-border)] rounded text-black p-1" rows={5} placeholder="Add a note here..." 
                             onChange={(e) => setNote(e.target.value)}></textarea>
                         </div>
-                    <button className="cursor-pointer col-span-6 bg-lime-300 mb-5 rounded-lg text-black p-1 hover:bg-black hover:text-white transition duration-200" onClick={handeTrack}>Track Workout</button>
+                    <button className="flex gap-2 justify-center items-center cursor-pointer md:col-span-6 bg-lime-300 mb-5 rounded-lg text-black p-1 hover:bg-black hover:text-white transition duration-200" onClick={handeTrack}>Track Workout <Pencil className="h-5"/> </button>
                 </div>
+            </div>
 
-                <div className="relative overflow-auto border border-black rounded p-4 h-70 text-[var(--color-text)]">
-                    <p className="sticky absolute top-0 bg-lime-300 rounded-2xl px-4 w-fit">Total Workouts: {numWorkouts}</p>
-                    <div className="flex flex-col gap-2 p-2">
+                <div className=" bg-white rounded-2xl p-4 h-70 text-[var(--color-text)] shadow-lg">
+                    <div className="flex p-2">
+                        <p className="text-lg font-bold">Recent Workouts</p>
+                        <p className=" top-0 bg-lime-300 rounded-2xl px-4 w-fit ml-auto">Total: {numWorkouts}</p>
+                    </div>
+                    <div className="flex flex-col gap-2 p-2 overflow-auto h-52">
                         {totalWorkouts.map((workout, i) => (
                         <WorkoutCard
                             key={workout.workout_id ?? i}
@@ -136,7 +142,6 @@ const workoutTracker = () => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
