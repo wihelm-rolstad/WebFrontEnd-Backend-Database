@@ -5,13 +5,13 @@ import FriendUpdates from './FriendUpdates.jsx'
 const dashboard = () => {
     return(
         <>
-            <div className="flex flex-col flex-wrap mx-auto gap-10 p-2 rounded-3xl max-w-7xl items-center justify-center">
+            <div className="flex w-full max-w-5xl flex-col gap-10 p-2 mx-auto rounded-3xl">
                 <div className="px-10 w-full flex bg-white h-20 shadow-lg rounded-2xl items-center">
                     <p>Welcome back</p>
                 </div>
-                <div className="flex flex-row gap-10">
-                <WeightProgress/>
-                <WorkoutTracker/>
+                <div className="flex w-full flex-wrap gap-6">
+                    <WeightProgress className="flex-1 min-w-[400px]" />
+                    <WorkoutTracker className="flex-1 min-w-[400px]" />
                 </div>
                 <FriendUpdates/>
             </div>

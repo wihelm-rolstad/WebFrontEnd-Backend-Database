@@ -14,7 +14,7 @@ import {
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 
 
-const weightProgress = () =>{
+const weightProgress = ({ className = "" }) =>{
 
     const today = new Date().toISOString().split("T")[0];
     const[date, setDate] = useState(today)
@@ -118,14 +118,14 @@ const weightProgress = () =>{
 
     return(
         <>
-            <div className="flex flex-col  min-w-0 border bg-white border-white p-4 rounded-2xl text-[var(--color-text)] shadow-lg">
+            <div className={`flex flex-col min-w-0 border bg-white border-white p-4 rounded-2xl text-[var(--color-text)] shadow-lg w-full ${className}`}>
                 <h3 className="text-2xl text-[var(--color-text)] font-bold">Register your weight</h3>
-                <div className="grid grid-cols-6 gap-0 mx-auto m-1 items-center w-full rounded">
+                <div className="grid grid-cols-1 md:grid-cols-6 gap-2 mx-auto m-1 items-center w-full rounded">
 
-                    <div className="col-span-3 gap-0">
+                    <div className="md:col-span-2 gap-0 min-w-0">
                         <p>Weight</p>
                         <input 
-                            className="w-50 border border-[var(--color-border)] p-2 rounded-lg bg-white"
+                            className="w-full border border-[var(--color-border)] p-2 rounded-lg bg-white"
                             type="number" step="0.1" min="0" max="500" 
                             placeholder = "Enter weight"
                             value={weight}
@@ -133,20 +133,20 @@ const weightProgress = () =>{
                         </input>
                     </div>
 
-                    <div className="col-span-1 gap-0">
+                    <div className="md:col-span-2 gap-0 min-w-0">
                         <p>Unit</p>
                         <select 
-                            className="w-14 bg-white border border-[var(--color-border)] rounded-lg h-10" 
+                            className="w-full bg-white border border-[var(--color-border)] rounded-lg h-10" 
                             onChange={(e) => setUnit(e.target.value)}>
                             <option>kg</option>
                             <option>lbs</option>
                         </select>
                     </div>
 
-                    <div className="col-span-2 gap-0">
+                    <div className="md:col-span-2 gap-0 min-w-0">
                         <p>Date</p>
                         <input 
-                            className="bg-white border border-[var(--color-border)] rounded-lg h-10"
+                            className="w-full bg-white border border-[var(--color-border)] rounded-lg h-10 p-1"
                             type="date" 
                             value={date} 
                             onChange={(e) => setDate(e.target.value) }>
@@ -155,10 +155,10 @@ const weightProgress = () =>{
                 </div>
 
                 <button 
-                className="cursor-pointer bg-lime-300 w-full p-1 mx-auto rounded-lg hover:bg-black hover:text-white transition duration-200"
+                className="cursor-pointer bg-lime-300 w-full p-1 mx-auto rounded-lg hover:bg-lime-500 hover:text-white transition duration-200"
                 onClick={handleRegisterWeight}>Register Weight</button>
 
-                <p style={{color}} className="">{userFeedback}</p>
+                <p style={{color}} className="mx-auto">{userFeedback}</p>
                 
                 <div className="w-full rounded-2xl p-2 h-64 mx-auto">
                     <Line data={data} options={options} />
