@@ -16,8 +16,8 @@ public class registerController {
 
     @PostMapping("/register")
     public String register(@RequestBody registerRequest body){
-        String sql = "insert into public.user (email, phone_number, password) values (?, ?, ?)";
-        jdbc.update(sql, body.getEmail(), body.getPhoneNumber(), body.getPassword());
+        String sql = "insert into public.user (email, phone_number, password, first_name, last_name) values (?, ?, ?, ?, ?)";
+        jdbc.update(sql, body.getEmail(), body.getPhoneNumber(), body.getPassword(), body.getFirstName(), body.getLastName());
         return "ok";
     }
 }

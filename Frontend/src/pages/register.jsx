@@ -5,6 +5,8 @@ const register = () =>{
     const [userEmail, setUserEmail] = useState("");
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    const [userFirstName, setUserFirstName] = useState("");
+    const [userLastName, setUserLastName] = useState("");
 
     const navigate = useNavigate();
 
@@ -14,11 +16,15 @@ const register = () =>{
         console.log("userEmail:", userEmail);
         console.log("userPhoneNumber:", userPhoneNumber);
         console.log("userPassword:", userPassword);
+        console.log("userFirstName:", userFirstName);
+        console.log("userLastName:", userLastName);
 
         const payload = {
             email: userEmail,
             phoneNumber: userPhoneNumber,
             password: userPassword,
+            firstName: userFirstName,
+            lastName: userLastName
         };
 
         try{
@@ -46,6 +52,16 @@ const register = () =>{
             <h1 className="text-3xl">Register.</h1>
             <div className="flex flex-col gap-2 w-140 mx-auto p-2 items-center text-black">
                 <input className="bg-white rounded p-1"
+                type="text" 
+                placeholder="First name"
+                onChange={(e) => setUserFirstName(e.target.value)}></input>
+
+                <input className="bg-white rounded p-1"
+                type="text" 
+                placeholder="Last name"
+                onChange={(e) => setUserLastName(e.target.value)}></input>
+
+                <input className="bg-white rounded p-1"
                 type="email" 
                 placeholder="your email adress" 
                 onChange={(e) => setUserEmail(e.target.value)}></input>
@@ -60,6 +76,7 @@ const register = () =>{
                 type="password" 
                 placeholder="password"
                 onChange={(e) => setUserPassword(e.target.value)}></input>
+
             </div>
             <button type="submit" className="bg-white border border-white mx-auto text-black p-1 rounded w-40 hover:bg-black hover:text-white hover:scale-110 transition duration-200" onClick={handleRegister}>Register</button>
             <p className="cursor-pointer" onClick={() => navigate("/")}>Already have an account? Log in</p>

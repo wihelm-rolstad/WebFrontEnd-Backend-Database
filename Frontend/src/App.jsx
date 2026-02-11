@@ -23,8 +23,6 @@ function LoginRoute() {
 }
 
 
-
-
 function App(){
   return (
     <BrowserRouter>

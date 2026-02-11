@@ -39,7 +39,8 @@ const Social = () => {
                             {allUsers.map((u, i) => (
                                 <UserCard
                                     key={u.user_id ?? i}
-                                    email={u.email}
+                                    first_name={u.first_name}
+                                    last_name={u.last_name}
                                 />
                             ))}
                         </div>
