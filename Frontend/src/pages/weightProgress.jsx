@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
-import {Info} from 'lucide-react'
+import {AppleIcon, Info} from 'lucide-react'
 import {
   Chart as ChartJS,
   LineElement,
@@ -25,6 +25,8 @@ const weightProgress = ({ className = "" }) =>{
 
     const[color, setColor] = useState("red")
     const[userFeedback, setUserFeedback] = useState("");
+
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         loadWeight();
@@ -70,7 +72,7 @@ const weightProgress = ({ className = "" }) =>{
             }
 
             try{
-                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/register-weight", {
+                const response = await fetch(`${API_BASE_URL}/register-weight`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -98,7 +100,7 @@ const weightProgress = ({ className = "" }) =>{
     async function loadWeight(){
         const token = localStorage.getItem("sessionToken")
          try{
-                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/get-weights", {
+                const response = await fetch(`${API_BASE_URL}/get-weights`, {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}`},
                 })

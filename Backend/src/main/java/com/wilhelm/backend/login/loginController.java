@@ -8,10 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {
-    "http://localhost:5173",
-    "https://fitness-app-amber-xi-29.vercel.app", "https://liftlog.no"
-})
 @RestController
 public class loginController {
 
@@ -22,14 +18,12 @@ public class loginController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> register(@RequestBody loginRequest body){
-        System.out.println("Login request hit the backend for: " + "email:" + body.getEmail() + " Password: " + body.getPassword());
         String sql = "select user_id from public.\"user\" where email = ? and password = ?";
         Long userId; 
         try {
             userId = jdbc.queryForObject(sql, Long.class, body.getEmail(), body.getPassword());
         } catch(EmptyResultDataAccessException e){return ResponseEntity.ok(Map.of("status", "invalid"));}
 
-        System.out.println("user id: " + userId);
         String user_token = generateToken();
         storeToken(user_token, userId);
         return ResponseEntity.ok(Map.of( //returns the new token to the frontend for the client to store and later use on requests

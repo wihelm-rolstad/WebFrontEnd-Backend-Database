@@ -13,6 +13,9 @@ const workoutTracker = ({ className = "" }) => {
     const[duration, setDuration] = useState("")
     const[note, setNote] = useState("")
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
     useEffect(() => {
         loadWorkouts();
     }, []);
@@ -34,7 +37,7 @@ const workoutTracker = ({ className = "" }) => {
             }
 
             try{
-                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/register-workout",{
+                const response = await fetch(`${API_BASE_URL}/register-workout`,{
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -62,7 +65,7 @@ const workoutTracker = ({ className = "" }) => {
     async function loadWorkouts(){
         const token = localStorage.getItem("sessionToken")
          try{
-                const response = await fetch("https://webfrontend-backend-database-354058670203.europe-west1.run.app/get-workouts", {
+                const response = await fetch(`${API_BASE_URL}/get-workouts`, {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}`},
                 })
