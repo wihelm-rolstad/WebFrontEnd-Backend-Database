@@ -13,7 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
             .allowedOrigins(
                 "http://localhost:5174",
                 "http://127.0.0.1:5174",
-                "https://fitness-app-amber-xi-29.vercel.app"
+                "https://fitness-app-amber-xi-29.vercel.app",
+                "https://liftlog.no"
             )
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
             .allowedHeaders("*");
